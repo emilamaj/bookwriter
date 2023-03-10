@@ -22,23 +22,13 @@
 
 .container-outline-text {
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: left;
     flex-direction: column;
     margin: 5px;
-}
-
-.number-chapter {
-    font-size: 1.3em;
-    height: 30px;
-    padding: 0;
-    margin: 0;
-    /* Set the font color to grey */
-    color: #1a1a1a;
-    font-family: 'Roboto', sans-serif;
 }
 
 .label-chapter {
@@ -62,6 +52,18 @@
     font-family: 'Roboto', sans-serif;
     /* translate right by 1 level */
     transform: translate(2em, 0);
+}
+
+.label-item {
+    font-size: 0.9em;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    /* Set the font color to grey */
+    color: #444444;
+    font-family: 'Roboto', sans-serif;
+    /* translate right by 2 levels */
+    transform: translate(4em, 0);
 }
 
 .outline-bottom {

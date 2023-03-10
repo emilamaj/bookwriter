@@ -32,6 +32,7 @@ function fetchPromptResult(prompt) {
       }
       return response.json();
     }).then(data => {
+        console.log("Received data: ", data);
         return data.choices[0].message.content;
     })
     .catch(error => {
@@ -39,36 +40,52 @@ function fetchPromptResult(prompt) {
     });
 }
 
-// This function parses a string containing the outline of a book (chapters and sections) and returns an object with the chapters and sections.
-function parseChaptersSections(result) {
+// This function parses a string containing the outline of a book (chapters, sections and items) and returns an object with the chapters, sections and items in 1D, 2D, 3D arrays.
+function parseOutline(result) {
     let chapters = []; // Contains the list of the chapters
     let sections = []; // 2D array containing the sections of each chapter
+    let items = []; // 3D array containing the items of each section of each chapter
     
     let currentChapter = -1; // Index of the current chapter
+    let currentSection = -1; // Index of the current section
     let lines = result.split("\n");
     for (let i = 0; i < lines.length; i++) {
+        // Remove leading and trailing spaces, and tabs
         let line = lines[i].trim();
-        if (lines[i] !== "") {
-            let line = lines[i];
+        line = line.replace(/\t/g, "");
+        if (line !== "") {
+            console.log("line: ", line)
+
             if (line.startsWith("Chapter")) {
+                console.log("Chapter found")
                 currentChapter++;
+                currentSection = -1;
                 sections.push([]); // Add a new array for the sections of the new chapter
+                items.push([]); // Add a new array for the items of the new chapter
 
                 // Capture the title of the chapter using regex
+                // Match "Chapter 1. Introduction" or "Chapter 1: Introduction"
                 let chapterTitle = line.match(/Chapter\s\d+\.\s(.*)/)[1];
                 chapters.push(chapterTitle);
-
             }
-            else if (line.startsWith("-Section")) {
+            else if (line.startsWith("Section")) {
+                console.log("Section found")
+                currentSection++;
+                items[currentChapter].push([]); // Add a new array for the items of the new section
                 // Capture the title of the section using regex
-                let sectionTitle = line.match(/-Section\s\d+:\s(.*)/)[1];
+                // Match "Section 1. Overview" or "Section 1: Overview"
+                let sectionTitle = line.match(/Section\s\d+\.\s(.*)/)[1];
                 sections[currentChapter].push(sectionTitle);
+            }
+            else if (line.startsWith("-")) {
+                console.log("Item found")
+                items[currentChapter][currentSection].push(line.substring(1));
             }
         }
     }
 
-    return { chapters, sections };
+    return { chapters, sections, items };
 }
 
 
-export default {fetchPromptResult, parseChaptersSections};
+export default {fetchPromptResult, parseOutline};

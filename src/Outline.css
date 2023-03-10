@@ -1,6 +1,6 @@
 /* Style corresponding to OutlineView component */
 
-.container-form {
+.container-outline {
     width: 100%;
     max-width: 600px;
     height: auto;
@@ -11,9 +11,11 @@
     flex-direction: column;
     background-color: #f5f5f5;
     padding: 10px;
+    /* Set the margin top to 10% of the screen height */
+    margin-top: 10%;
 }
 
-.form-title {
+.outline-title {
     margin: 0;
     padding: 10px;
 }
@@ -27,4 +29,63 @@
     align-items: left;
     flex-direction: column;
     margin: 5px;
+}
+
+.number-chapter {
+    font-size: 1.3em;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    /* Set the font color to grey */
+    color: #1a1a1a;
+    font-family: 'Roboto', sans-serif;
+}
+
+.label-chapter {
+    display: inline-block;
+    font-size: 1.3em;
+    height: 30px;
+    padding: 0 0 0 5px;
+    margin: 0;
+    /* Set the font color to grey */
+    color: #444444;
+    font-family: 'Roboto', sans-serif;
+}
+
+.label-section {
+    font-size: 0.9em;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    /* Set the font color to grey */
+    color: #444444;
+    font-family: 'Roboto', sans-serif;
+    /* translate right by 1 level */
+    transform: translate(2em, 0);
+}
+
+.outline-bottom {
+    /* Space the buttons out */
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.button-outline {
+    width: auto;
+    min-width: 100px;
+    /* max-width: 100px; */
+    height: 35px;
+    color: #444444;
+    font-size: 1.1em;
+    border-radius: 5px;
+    border: thin solid #ccc;
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
 }

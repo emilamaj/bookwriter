@@ -11,8 +11,8 @@ function App() {
 	const [book, setBook] = useState({
 		title: 'Mathematics of quantitative finance',
 		description: 'Written for STEM students and professionals, this book provides extensive coverage of the mathematics of quantitative finance.',
-		chapters: [], // Array of strings containing the names of the chapters
-		sections: [], // 2D array containing the names of the sections of each chapter
+		chapters: ["Example chapter"], // Array of strings containing the names of the chapters
+		sections: [["Click to generate outline"]], // 2D array containing the names of the sections of each chapter
 		items: [], // 3D array containing the names of the items of each section of each chapter
 		content: [], // 3D array containing the content corresponding to each item of each section of each chapter
 	});
@@ -26,7 +26,13 @@ function App() {
 		prompt += "Chapters 3. Some chapter's name\n";
 		prompt += "-Section 1: Title of section 1 of chapter 3\n";
 		prompt += "\nTry to generate at least 5 sections per chapter if possible.\n";
-		let result = await Utils.fetchPromptResult(prompt);
+		
+		console.log("Prompt: ", prompt)
+		const resultPromise = Utils.fetchPromptResult(prompt);
+		resultPromise.finally(() => {
+			console.log("Prompt closed");
+		});
+		let result = await resultPromise;
 		let parsedOutline = Utils.parseChaptersSections(result);
 		console.log("Parsed outline: ", parsedOutline)
 		setBook({
@@ -34,7 +40,6 @@ function App() {
 			chapters: parsedOutline.chapters,
 			sections: parsedOutline.sections,
 		});
-		setCurrentView(currentView + 1);
 	};
 
 	// This function handles onChange on the input fields of the DescriptionView component
@@ -45,8 +50,8 @@ function App() {
 		
 
 	const views = [
-		<DescriptionView bookInfo={book} handleChange={updateBook} nextStep={generateOutline} />,
-		<OutlineView bookData={book} />,
+		<DescriptionView bookInfo={book} handleChange={updateBook} nextStep={() => {setCurrentView(currentView+1)}} />,
+		<OutlineView bookData={book} genOutline={generateOutline} previousStep={() => {setCurrentView(currentView-1)}} nextStep={() => {setCurrentView(currentView+1)}}/>,
 		<ContentGenerationView updateBook={updateBook} />,
 	];
 

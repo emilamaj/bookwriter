@@ -10,6 +10,8 @@
     flex-direction: column;
     background-color: #f5f5f5;
     padding: 10px;
+    /* Set the margin top to 10% of the screen height */
+    margin-top: 10%;
 }
 
 .form-title {
@@ -60,6 +62,8 @@
     /* Allow the user to resize vertiacally */
     resize: vertical;
     border: thin solid #ccc;
+
+    max-height: 400px;
 }
 
 .button-form {
@@ -73,5 +77,5 @@
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
-    
+
 }

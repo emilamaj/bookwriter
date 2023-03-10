@@ -1,74 +1,28 @@
-// This component is the third step of the app. It allows the user to generate the content of the book, and to edit it.
-import React, { useState } from 'react';
+// This component is the third step of the app. It allows the user to select a particular item of the book and generate the content for it. There is a button to go back.
 
-const ContentGenerationView = ({ bookData }) => {
-  const [items, setItems] = useState(bookData.items);
-  const [content, setContent] = useState(bookData.content);
-  const [itemName, setItemName] = useState('');
-  const [itemContent, setItemContent] = useState('');
+import React from "react";
+import './ContentGeneration.css';
 
-  const handleChange = (event) => {
-    if (event.target.name === 'item') {
-      setItemName(event.target.value);
-    } else {
-      setItemContent(event.target.value);
-    }
-  };
+const ContentGenerationView = ({bookData, genContent, previousStep}) => {
+    
+    return (
+        <div className="container-content">
+            <p className="content-title">Content Generation</p>
+            <div className="container-content-text">
+                <p className="label-chapter">{bookData.chapters[bookData.chapIndex]}</p>
+                <p className="label-section">{bookData.sections[bookData.chapIndex][bookData.sectIndex]}</p>
+                <p className="label-item">{bookData.items[bookData.chapIndex][bookData.sectIndex][bookData.itemIndex]}</p>
+            </div>
 
-  const handleAddItem = () => {
-    setItems([...items, itemName]);
-    setItemName('');
-  };
+            <div className="container-content-text">
+                <p className="label-chapter">{bookData.content[bookData.chapIndex][bookData.sectIndex][bookData.itemIndex]}</p>
+            </div>
 
-  const handleAddContent = () => {
-    setContent([...content, itemContent]);
-    setItemContent('');
-  };
-
-  const handleRemoveItem = (item) => {
-    const newItems = items.filter((i) => i !== item);
-    setItems(newItems);
-  };
-
-  const handleRemoveContent = (content) => {
-    const newContent = content.filter((c) => c !== content);
-    setContent(newContent);
-  };
-
-  return (
-    <div>
-      <div>
-        <input type="text" name="item" value={itemName} onChange={handleChange} />
-        <button type="button" onClick={handleAddItem}>Add Item</button>
-      </div>
-      <div>
-        <input type="text" name="content" value={itemContent} onChange={handleChange} />
-        <button type="button" onClick={handleAddContent}>Add Content</button>
-      </div>
-      <div>
-        <h2>Items</h2>
-        <ul>
-          {items.map((item) => (
-            <li key={item}>
-              <span>{item}</span>
-              <button type="button" onClick={() => handleRemoveItem(item)}>Remove Item</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Content</h2>
-        <ul>
-          {content.map((content) => (
-            <li key={content}>
-              <span>{content}</span>
-              <button type="button" onClick={() => handleRemoveContent(content)}>Remove Content</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-};
+            <div className="content-bottom">
+                <button className="button-content" type="button" onClick={previousStep}>Prev.</button>
+            </div>
+        </div>
+    );
+}
 
 export default ContentGenerationView;

@@ -18,12 +18,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 # First step: Description of the book
 
-![Description of the book](/description.png)
+![Book description input](/description.png)
+
 Enter what would be the title of your book, and a short description of it.
 
 # Second step: Generation of the outline
 
-![Outline of the book](/outline_generation.png)
+![Outline generation and parsing](/outline_generation.png)
+
 Here you can generate the outline of the book.
 The result of the generation is displayed on the top. You can edit the text manually or re-generate over it.
 Once you're satisfied, click "parse" to make the app parse the text.
@@ -35,7 +37,8 @@ This format was chosen because it seems to work best for GPT 3.5
 
 # Third step: Parts and contents of the book
 
-![Parts of the book](/content_generation.png)
+![Parts and content generation](/content_generation.png)
+
 Select a an item/subsection on the left panel and generate appropriate parts on the right.
 You can manually remove some parts of re-generate them all.
 Once you have selected a part, you can generate the content associated with it.

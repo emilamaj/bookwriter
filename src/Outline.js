@@ -4,34 +4,40 @@
 import React from "react";
 import "./Outline.css";
 
-const OutlineView = ({bookData, genOutline, previousStep, nextStep}) => {
+const OutlineView = ({bookData, genOutline, changeOutline, parseOutline, previousStep, nextStep}) => {
     
     return (
         <div className="container-outline">
             <p className="outline-title">Book Outline</p>
             <div className="container-outline-text">
-                {bookData.chapters.map((chap, index) => (
-                    <div key={index}>
-                        <p className="label-chapter">{index+1}. {chap}</p>
-                        {bookData.sections[index].map((sect, jindex) => (
-                            <div key={jindex}>
-                                <p className="label-section">{jindex+1}. {sect}</p>
-                                {bookData.items[index][jindex].map((item, kindex) => (
-                                    <div key={kindex}>
-                                        <p className="label-item">{kindex+1}. {item}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                <label className="label-text">Raw Outline</label>
+                <textarea className="input-outline" type="text" name="rawOutline" value={bookData.rawOutline} onChange={changeOutline}/>
+            </div>
+            <div className="container-outline-parsed">
+                <label className="label-parsed">Parsed Outline</label>
+                <div className="container-outline-labels">
+                    {bookData.chapters.map((chap, index) => (
+                        <div key={index}>
+                            <p className="label-chapter">{index+1}. {chap}</p>
+                            {bookData.sections[index].map((sect, jindex) => (
+                                <div key={jindex}>
+                                    <p className="label-section">{jindex+1}. {sect}</p>
+                                    {bookData.items[index][jindex].map((item, kindex) => (
+                                        <div key={kindex}>
+                                            <p className="label-item">{kindex+1}. {item}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div className="outline-bottom">
                 <button className="button-outline" type="button" onClick={previousStep}>Prev.</button>
-                {/* <button className="button-outline" type="button" onClick={genOutline}>Generate</button>
-                We want to toggle the text of the button, so we do instead: */}
-                <button className="button-outline" type="button" disabled={bookData.isGenerating} onClick={genOutline}>{bookData.isGenerating ? "Generating...":"Generate"}</button>
+                <button className={"button-outline"  + (bookData.isGenOutline ? " button-waiting":"")} type="button" disabled={bookData.isGenOutline} onClick={genOutline}>{bookData.isGenOutline ? "Generating...":"Generate"}</button>
+                <button className="button-outline" type="button" onClick={parseOutline}>Parse</button>
                 <button className="button-outline" type="button" onClick={nextStep}>Next</button>
             </div>
         </div>

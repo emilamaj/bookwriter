@@ -31,8 +31,33 @@
     margin: 5px;
 }
 
+.input-outline {
+    font-size: 1em;
+    min-height: 100px;
+    padding-left: 5px;
+    /* Set the font color to grey */
+    color: #444444;
+    font-family: 'Roboto', sans-serif;
+    border: thin solid #ccc;
+}
+
+.container-outline-parsed {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.container-outline-labels {
+    padding: 5px;
+    border: thin solid #ccc;
+}
+
 .label-chapter {
-    display: inline-block;
     font-size: 1.3em;
     height: 30px;
     padding: 0 0 0 5px;
@@ -86,8 +111,12 @@
     color: #444444;
     font-size: 1.1em;
     border-radius: 5px;
-    border: thin solid #ccc;
-    background-color: #f5f5f5;
+    border: thin solid #a7a7a7;
+    background-color: light grey;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
+}
+
+.button-waiting {
+    cursor: wait;
 }

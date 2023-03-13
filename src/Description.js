@@ -5,7 +5,7 @@ import "./Description.css";
 const DescriptionView = ({ bookInfo, handleChange, nextStep }) => {
   return (
     <div className="container-form">
-        <p className="form-title">Book Title and Description</p>
+        <p className="form-title">BookWriter</p>
         <div className="form-element">
             <label className="label-input" >Title</label>
             <input className="input-single" type="text" name="title" value={bookInfo.title} onChange={handleChange} />

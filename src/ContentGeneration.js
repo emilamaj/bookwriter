@@ -35,7 +35,7 @@ const ContentGenerationView = ({bookData, selectItem, selectPart, deletePart, ge
 
                 <div className="container-content-generation">
                     <div className="container-gen">
-                        <button className="button-content" type="button" onClick={genParts}>Parts</button>
+                        <button className={"button-content" + (bookData.isGenParts ? " button-waiting":"")} type="button" disabled={bookData.isGenParts} onClick={genParts}>{bookData.isGenParts ? "Generating...":"Parts"}</button>
                         <div className="container-parts">
                             {
                                 (bookData.selectedChapter!=null) && (bookData.selectedSection!=null) && (bookData.selectedItem!=null) ?

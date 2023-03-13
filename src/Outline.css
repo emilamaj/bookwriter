@@ -33,18 +33,23 @@
 
 .input-outline {
     font-size: 1em;
-    min-height: 100px;
+    min-height: 200px;
     padding-left: 5px;
     /* Set the font color to grey */
     color: #444444;
     font-family: 'Roboto', sans-serif;
     border: thin solid #ccc;
+    resize: vertical;
+    /* Disable line wrapping for the textarea */
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: scroll;
 }
 
 .container-outline-parsed {
     width: 100%;
     max-width: 550px;
-    height: auto;
+    min-height: 200px;
     display: flex;
     justify-content: center;
     align-items: left;
@@ -55,6 +60,10 @@
 .container-outline-labels {
     padding: 5px;
     border: thin solid #ccc;
+    min-height: 200px;
+    max-height: 500px;
+    resize: vertical; 
+    overflow: auto;
 }
 
 .label-chapter {
@@ -79,7 +88,7 @@
     transform: translate(2em, 0);
 }
 
-.label-item {
+.label-item-outline {
     font-size: 0.9em;
     height: 20px;
     padding: 0;

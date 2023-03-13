@@ -85,45 +85,60 @@
 
 .container-parts {
     width: 100%;
+    max-width: 480px;
     display: flex;
     justify-content: center;
     align-items: left;
     flex-direction: column;
     margin: 5px;
+    overflow: auto;
 }
 
 .input-content {
     width: 100%;
-    min-height: 100px;
+    min-height: 300px;
     resize: vertical;
     margin: 5px;
 }
 
 .label-item {
+    font-size: 0.9em;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    /* Set the font color to grey */
+    color: #444444;
+    font-family: 'Roboto', sans-serif;
+    /* translate right by 2 levels */
+    transform: translate(4em, 0);
     cursor: pointer;
 }
 
 .container-part-single {
     width: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: flex-start;
     align-items: left;
-    flex-direction: row;
+    flex-direction: row; */
+    /* Don't wrap */
+    white-space: nowrap;
+    margin: 2px;
 }
 
 .button-part-delete {
     display: inline-block;
-    width: 20px;
+    width:  20px;
     height: 20px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     border: thin solid #a7a7a7;
     background-color: #f5f5f5;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
-    margin: 5px;
+    margin: 3px;
     padding: 0;
     font-size: 1em;
     color: #444444;
+
 }
 
 .label-part {
@@ -134,7 +149,7 @@
     font-family: 'Roboto', sans-serif;
     margin: 1px;
     padding: 0;
-    word-wrap: none;
+    /* word-wrap: none; */
 }
 
 .label-selected {

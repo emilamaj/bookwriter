@@ -24,7 +24,7 @@ const OutlineView = ({bookData, genOutline, changeOutline, parseOutline, previou
                                     <p className="label-section">{jindex+1}. {sect}</p>
                                     {bookData.items[index][jindex].map((item, kindex) => (
                                         <div key={kindex}>
-                                            <p className="label-item">{kindex+1}. {item}</p>
+                                            <p className="label-item-outline">{kindex+1}. {item}</p>
                                         </div>
                                     ))}
                                 </div>

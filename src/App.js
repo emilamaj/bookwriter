@@ -56,6 +56,8 @@ function App() {
 			});
 		});
 		let result = await resultPromise;
+		// Remove all the lines before and including "# Outline"
+		result = result.split("# Outline")[1];
 		console.log("Raw outline: ", result)
 		setBook({
 			...book,
@@ -93,9 +95,8 @@ function App() {
 		prompt += `The result should be formatted as follows:\n`;
 		prompt += `-Introductory point\n`;
 		prompt += `-Explanation of the point\n`;
-		prompt += `-Another detailed point\n`;
+		prompt += `-Another point\n`;
 		prompt += `...\n`;
-		prompt += `-Last point of the subsection\n`;
 		
 		console.log("Prompt: ", prompt)
 		setBook({

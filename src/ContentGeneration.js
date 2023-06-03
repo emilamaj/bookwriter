@@ -3,8 +3,8 @@
 import React from "react";
 import './ContentGeneration.css';
 
-const ContentGenerationView = ({bookData, selectItem, selectPart, deletePart, genParts, genContent, previousStep}) => {
-    
+const ContentGenerationView = ({ bookData, selectItem, selectPart, deletePart, genParts, genContent, previousStep }) => {
+
     return (
         <div className="container-content">
             <div className="content-top">
@@ -16,15 +16,15 @@ const ContentGenerationView = ({bookData, selectItem, selectPart, deletePart, ge
                     {bookData.chapters.map((chap, index) => (
                         <div key={index}>
                             <p className={"label-chapter label-outline" + (bookData.selectedChapter === index ? " label-selected" : "")}
-                            >{index+1}. {chap}</p>
+                            >{index + 1}. {chap}</p>
                             {bookData.sections[index].map((sect, jindex) => (
                                 <div key={jindex}>
                                     <p className={"label-section label-outline" + (bookData.selectedChapter === index && bookData.selectedSection === jindex ? " label-selected" : "")}
-                                    >{jindex+1}. {sect}</p>
+                                    >{jindex + 1}. {sect}</p>
                                     {bookData.items[index][jindex].map((item, kindex) => (
                                         <div key={kindex}>
                                             <p className={"label-item label-outline" + (bookData.selectedChapter === index && bookData.selectedSection === jindex && bookData.selectedItem === kindex ? " label-selected" : "")} onClick={() => selectItem(index, jindex, kindex)}
-                                            >{kindex+1}. {item}</p>
+                                            >{kindex + 1}. {item}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -35,25 +35,38 @@ const ContentGenerationView = ({bookData, selectItem, selectPart, deletePart, ge
 
                 <div className="container-content-generation">
                     <div className="container-gen">
-                        <button className={"button-content" + (bookData.isGenParts ? " button-waiting":"")} type="button" disabled={bookData.isGenParts} onClick={genParts}>{bookData.isGenParts ? "Generating...":"Parts"}</button>
+                        <button className={"button-content" + (bookData.isGenParts ? " button-waiting" : "")} type="button" disabled={bookData.isGenParts} onClick={genParts}>{bookData.isGenParts ? "Generating..." : "Parts"}</button>
                         <div className="container-parts">
                             {
-                                (bookData.selectedChapter!=null) && (bookData.selectedSection!=null) && (bookData.selectedItem!=null) ?
-                                bookData.parts[bookData.selectedChapter][bookData.selectedSection][bookData.selectedItem].map((part, index) => (
-                                    <div className="container-part-single" key={index}>
-                                        <button className="button-part-delete" type="button" onClick={() => deletePart(index)}>x</button>
-                                        <p className={"label-part" + (bookData.selectedPart === index ? " label-selected":"")} onClick={() => selectPart(index)}
-                                        >{part}</p>
-                                    </div>
-                                ))
-                                :
-                                <p className="label-part">Select an item</p>
+                                (bookData.selectedChapter != null) && (bookData.selectedSection != null) && (bookData.selectedItem != null) ?
+                                    bookData.parts[bookData.selectedChapter][bookData.selectedSection][bookData.selectedItem].map((part, index) => (
+                                        <div className="container-part-single" key={index}>
+                                            <button className="button-part-delete" type="button" onClick={() => deletePart(index)}>x</button>
+                                            <p className={"label-part" + (bookData.selectedPart === index ? " label-selected" : "")} onClick={() => selectPart(index)}
+                                            >{part}</p>
+                                        </div>
+                                    ))
+                                    :
+                                    <p className="label-part">Select an item</p>
                             }
                         </div>
                     </div>
                     <div className="container-gen">
-                        <button className={"button-content" + (bookData.isGenContent ? " button-waiting":"")} type="button" disabled={bookData.isGenContent} onClick={genContent}>{bookData.isGenContent ? "Generating...":"Content"}</button>
-                        <textarea className="input-content" type="text" name="content" value={bookData.content[bookData.selectedChapter]?.[bookData.selectedSection]?.[bookData.selectedItem]?.[bookData.selectedPart] ?? 'Select part'} />
+                        <button className={"button-content" + (bookData.isGenContent ? " button-waiting" : "")} type="button" disabled={bookData.isGenContent} onClick={genContent}>{bookData.isGenContent ? "Generating..." : "Content"}</button>
+                        {/* <textarea className="input-content" type="text" name="content" value={bookData.content[bookData.selectedChapter]?.[bookData.selectedSection]?.[bookData.selectedItem]?.[bookData.selectedPart] ?? 'Select part'} /> */}
+                        <textarea
+                            className="input-content"
+                            type="text"
+                            name="content"
+                            value={
+                                bookData.content[bookData.selectedChapter] &&
+                                    bookData.content[bookData.selectedChapter][bookData.selectedSection] &&
+                                    bookData.content[bookData.selectedChapter][bookData.selectedSection][bookData.selectedItem] &&
+                                    bookData.content[bookData.selectedChapter][bookData.selectedSection][bookData.selectedItem][bookData.selectedPart]
+                                    ? bookData.content[bookData.selectedChapter][bookData.selectedSection][bookData.selectedItem][bookData.selectedPart]
+                                    : 'Select part'
+                            }
+                        />
                     </div>
                 </div>
             </div>

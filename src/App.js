@@ -42,14 +42,13 @@ function App() {
 		prompt += "\t\t-Some last point of the section\n";
 		prompt += "\nTry to generate at least 5 sections per chapter, and 6 points per section, if possible.\n";
 		
-		console.log("Prompt: ", prompt)
 		setBook({
 			...book,
 			isGenOutline: true,
 		});
 		const resultPromise = Utils.fetchPromptResult(prompt);
 		resultPromise.finally(() => {
-			console.log("Request done.");
+			console.log("Received response.");
 			setBook({
 				...book,
 				isGenOutline: false,
@@ -98,14 +97,13 @@ function App() {
 		prompt += `-Another point\n`;
 		prompt += `...\n`;
 		
-		console.log("Prompt: ", prompt)
 		setBook({
 			...book,
 			isGenParts: true,
 		});
 		const resultPromise = Utils.fetchPromptResult(prompt);
 		resultPromise.finally(() => {
-			console.log("Request done.");
+			console.log("Received response.");
 			setBook({
 				...book,
 				isGenParts: false,
@@ -134,14 +132,13 @@ function App() {
 		prompt += `-${book.parts[book.selectedChapter][book.selectedSection][book.selectedItem][book.selectedPart]}\n`;
 		prompt += `The text must absolutely contain at least 1000 words !\n`;
 
-		console.log("Prompt: ", prompt)
 		setBook({
 			...book,
 			isGenContent: true,
 		});
 		const resultPromise = Utils.fetchPromptResult(prompt);
 		resultPromise.finally(() => {
-			console.log("Request done.");
+			console.log("Received response.");
 			setBook({
 				...book,
 				isGenContent: false,

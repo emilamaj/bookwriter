@@ -18,10 +18,12 @@ function fetchPromptResult(prompt) {
 
     let model = "gpt-3.5-turbo"
     let messages = [{"role": "user", "content": prompt}]
+    let promptTokensApprox = prompt.split(" ").length;
     let data = {
         "model": model,
         "messages": messages,
-        "max_tokens": 3800,
+        // Model limit is 4096 tokens, take crude estimation of prompt token count, with some margin for safety.
+        "max_tokens": Math.floor(4096 - 1.5*promptTokensApprox - 100),
         "temperature": 0.3,
     }
 
@@ -36,7 +38,7 @@ function fetchPromptResult(prompt) {
     return fetch(url, payload)
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status} statusText: ${response.statusText} raw response: ${response}`);
       }
       return response.json();
     }).then(data => {
